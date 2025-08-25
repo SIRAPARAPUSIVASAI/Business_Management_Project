@@ -58,5 +58,15 @@ pipeline {
                 )
             }
         }
+        
+        stage ("Build App Image") {
+            steps {
+                script {
+                
+                    // Build Docker image
+                    sh "docker build -t ssiraparapu/business-mgmt-app:01."
+                }
+            }
+        }
     }
 }
