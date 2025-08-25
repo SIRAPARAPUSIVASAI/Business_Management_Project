@@ -64,7 +64,7 @@ pipeline {
                 script {
                 
                     // Build Docker image
-                    sh "sudo docker build -t ssiraparapu/business-mgmt-app ."
+                    sh "docker build -t ssiraparapu/business-mgmt-app ."
                 }
             }
         }
