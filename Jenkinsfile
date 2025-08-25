@@ -68,5 +68,16 @@ pipeline {
                 }
             }
         }
+        stage ("Push App Image") {
+            steps {
+              
+                withCredentials([usernamePassword(credentialsId: 'docker-jenkins-creds', passwordVariable: 'Sivasai@151224', usernameVariable: 'ssiraparapu')]) {
+                    sh """
+                       echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
+                       docker push ssiraparapu/business-mgmt-app
+                    """
+                }
+            }
+        }
     }
 }
