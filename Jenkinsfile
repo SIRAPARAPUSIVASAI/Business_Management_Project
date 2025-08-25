@@ -47,7 +47,7 @@ pipeline {
                     nexusUrl: 'nexus:8081',
                     groupId: 'com.business',
                     version: '0.0.1-SNAPSHOT',   // must match POM
-                    repository: 'maven-snapshots',  // snapshot repo
+                    repository: 'maven-releases',  // snapshot repo
                     credentialsId: 'nexus-creds',
                     artifacts: [
                         [artifactId: 'BusinessProject',    // must match POM
