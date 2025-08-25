@@ -4,7 +4,7 @@ pipeline {
     environment {
         REGISTRY = "docker.io"
         IMAGE_NAME = "ssiraparapu/business-mgmt-app"
-        SONAR_HOST_URL = "http://sai.sonarqube.local"
+        SONAR_HOST_URL = "http://sai.sonarqube.local:9000"
     }
 
     stages {
