@@ -64,7 +64,7 @@ pipeline {
                 script {
                 
                     // Build Docker image
-                    sh "sudo docker build -t ${REGISTRY}/${IMAGE_NAME}:${env.BUILD_NUMBER} ."
+                    sh "docker build -t ${REGISTRY}/${IMAGE_NAME}:${env.BUILD_NUMBER} ."
                 }
             }
         }
