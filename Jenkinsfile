@@ -32,54 +32,56 @@ pipeline {
                 }
             }
         }
-        stage ("Check Quality Gate") {
-            steps {
-                timeout(time: 1, unit: 'MINUTES') {
-                    waitForQualityGate abortPipeline: true
-                }
-            }
-        }
-        stage("Upload Artifacts") {
-            steps {
-                nexusArtifactUploader(
-                    nexusVersion: 'nexus3',
-                    protocol: 'http',
-                    nexusUrl: 'nexus:8081',
-                    groupId: 'com.business',
-                    version: '0.0.1-SNAPSHOT',   // must match POM
-                    repository: 'maven-snapshots',  // snapshot repo
-                    credentialsId: 'nexus-creds',
-                    artifacts: [
-                        [artifactId: 'BusinessProject',    // must match POM
-                        classifier: '',
-                        file: 'target/BusinessProject-0.0.1-SNAPSHOT.jar',
-                        type: 'jar']
-                    ]
-                )
-            }
-        }
-        
-        stage ("Build App Image") {
-            steps {
-                script {
-                
-                    // Build Docker image
-                    sh "docker build -t ${REGISTRY}/${IMAGE_NAME}:${env.BUILD_NUMBER} ."
-                }
-            }
-        }
     }
 }
-//         stage ("Push App Image") {
+//         stage ("Check Quality Gate") {
 //             steps {
-              
-//                 withCredentials([usernamePassword(credentialsId: 'docker-jenkins-creds', passwordVariable: 'Sivasai@151224', usernameVariable: 'ssiraparapu')]) {
-//                     sh """
-//                        echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
-//                        docker push ssiraparapu/business-mgmt-app
-//                     """
+//                 timeout(time: 1, unit: 'MINUTES') {
+//                     waitForQualityGate abortPipeline: true
+//                 }
+//             }
+//         }
+//         stage("Upload Artifacts") {
+//             steps {
+//                 nexusArtifactUploader(
+//                     nexusVersion: 'nexus3',
+//                     protocol: 'http',
+//                     nexusUrl: 'nexus:8081',
+//                     groupId: 'com.business',
+//                     version: '0.0.1-SNAPSHOT',   // must match POM
+//                     repository: 'maven-snapshots',  // snapshot repo
+//                     credentialsId: 'nexus-creds',
+//                     artifacts: [
+//                         [artifactId: 'BusinessProject',    // must match POM
+//                         classifier: '',
+//                         file: 'target/BusinessProject-0.0.1-SNAPSHOT.jar',
+//                         type: 'jar']
+//                     ]
+//                 )
+//             }
+//         }
+        
+//         stage ("Build App Image") {
+//             steps {
+//                 script {
+                
+//                     // Build Docker image
+//                     sh "docker build -t ${REGISTRY}/${IMAGE_NAME}:${env.BUILD_NUMBER} ."
 //                 }
 //             }
 //         }
 //     }
 // }
+// //         stage ("Push App Image") {
+// //             steps {
+              
+// //                 withCredentials([usernamePassword(credentialsId: 'docker-jenkins-creds', passwordVariable: 'Sivasai@151224', usernameVariable: 'ssiraparapu')]) {
+// //                     sh """
+// //                        echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
+// //                        docker push ssiraparapu/business-mgmt-app
+// //                     """
+// //                 }
+// //             }
+// //         }
+// //     }
+// // }
