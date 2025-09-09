@@ -17,9 +17,8 @@ pipeline {
         stage("Run Code Scanning") {
             steps {
                 script {
-                    // resolve the Sonar Scanner installation path
-                     def scannerHome = tool name: 'sonar-scanner-7.2.0', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
-
+                    resolve the Sonar Scanner installation path
+                     def scannerHome = tool name: 'sonar-scanner-7.2.0'
                     withSonarQubeEnv('sonar-local') {
                         sh """
                             ${scannerHome}/bin/sonar-scanner \
@@ -83,5 +82,5 @@ pipeline {
 // //                 }
 // //             }
 // //         }
-// //     }
-// // }
+    //  }
+// }
