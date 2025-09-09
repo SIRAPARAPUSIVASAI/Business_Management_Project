@@ -60,30 +60,27 @@ pipeline {
                 )
             }
         }
-    }
-}
+    
         
-//         stage ("Build App Image") {
-//             steps {
-//                 script {
+        stage ("Build App Image") {
+            steps {
+                script {
                 
-//                     // Build Docker image
-//                     sh "docker build -t ${REGISTRY}/${IMAGE_NAME}:${env.BUILD_NUMBER} ."
-//                 }
-//             }
-//         }
-//     }
-// }
-// //         stage ("Push App Image") {
-// //             steps {
+                    // Build Docker image
+                    sh "docker build -t ${REGISTRY}/${IMAGE_NAME}:${env.BUILD_NUMBER} ."
+                }
+            }
+        }
+        stage ("Push App Image") {
+            steps {
               
-// //                 withCredentials([usernamePassword(credentialsId: 'docker-jenkins-creds', passwordVariable: 'Sivasai@151224', usernameVariable: 'ssiraparapu')]) {
-// //                     sh """
-// //                        echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
-// //                        docker push ssiraparapu/business-mgmt-app
-// //                     """
-// //                 }
-// //             }
-// //         }
-    //  }
-// }
+                withCredentials([usernamePassword(credentialsId: 'docker-jenkins-creds', passwordVariable: 'Sivasai@151224', usernameVariable: 'ssiraparapu')]) {
+                    sh """
+                       echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
+                       docker push ssiraparapu/business-mgmt-app
+                    """
+                }
+            }
+        }
+     }
+}
