@@ -85,7 +85,7 @@ pipeline {
                     sh "kubectl apply -f k8s/mysql/"
 
                     sh """
-                        sed -i 's#docker.io/ssiraparapu/business-mgmt-app:[0-9]\\+#docker.io/ssiraparapu/business-mgmt-app:${9}#' k8s/app/deployment.yaml
+                        sed -i 's#docker.io/ssiraparapu/business-mgmt-app:[0-9]\\+#docker.io/ssiraparapu/business-mgmt-app:${BUILD_NUMBER}#' k8s/app/deployment.yaml
                         kubectl apply -f k8s/app/
                     """
                 }
