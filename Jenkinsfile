@@ -78,5 +78,18 @@ pipeline {
                 }
             }
         }
-     }
+        stage ("Deploy to cluster dev-kt-k8s") {
+            steps {
+                withKubeConfig(credentialsId: 'kubeconfig-dev-kt-k8s') {
+                    sh "kubectl apply -f k8s/namespace.yaml"
+                    sh "kubectl apply -f k8s/mysql/"
+
+                    sh """
+                        sed -i 's#docker.io/ssiraparapu/business-mgmt-app:[0-9]\\+#docker.io/ssiraparapu/business-mgmt-app:${9}#' k8s/app/deployment.yaml
+                        kubectl apply -f k8s/app/
+                    """
+                }
+            }
+        }
+    }
 }

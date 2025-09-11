@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: business-mgmt-app
-          image: docker.io/vsiraparapu/business-mgmt-app:latest
+          image: docker.io/ssiraparapu/business-mgmt-app:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 2330
